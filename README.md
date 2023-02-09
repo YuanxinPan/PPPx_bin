@@ -51,8 +51,8 @@ cd example/
 ./test.sh
 ```
 
-![Kinematic PPP using GEC data for ZIM2 on 2022-100 ](example/ZIM200CHE_R_20221000000_01D_30S_MO.png)
 **Kinematic PPP using GEC data for ZIM2 on 2022-100**
+![Kinematic PPP using GEC data for ZIM2 on 2022-100 ](example/ZIM200CHE_R_20221000000_01D_30S_MO.png)
 
 # Note
 
