@@ -20,6 +20,7 @@ A software package for multi-GNSS Precise Point Positioning
 1. Download precise satellite products: sp3+clk+erp+[obx]
 
 > Nominal satellite attitude will be used if there is no `obx` product
+
 > `erp` product should contain at least 3 days' records (for interpolation)
 
 2. Modify the configuration file `ppp.ini`
@@ -36,6 +37,7 @@ A software package for multi-GNSS Precise Point Positioning
 ```
 
 > Note: initial position should be provided in the RINEX-OBS header
+
 > You can exclude problematic satellites in `ppp.ini` accroding to postfit residuals (visualization with rtkplot)
 
 4. Visualization
