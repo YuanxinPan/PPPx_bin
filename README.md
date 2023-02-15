@@ -9,7 +9,7 @@ Executables for the PPPx software package
 A software package for multi-GNSS Precise Point Positioning
 
 - Modular design
-- Support GPS/GLONASS/Beidou/Galileo/QZSS
+- Support GPS/GLONASS/Beidou-2+3/Galileo/QZSS
 - Flexible frequency selection (L1/L2/L5/...)
 - High-precision yet computation efficient
 - Dual-frequency Ionosphere-free combination
@@ -17,7 +17,10 @@ A software package for multi-GNSS Precise Point Positioning
 
 # Usage
 
-1. Download precise satellite products: sp3+clk+erp
+1. Download precise satellite products: sp3+clk+erp+[obx]
+
+> Nominal satellite attitude will be used if there is no `obx` product
+> `erp` product should contain at least 3 days' records (for interpolation)
 
 2. Modify the configuration file `ppp.ini`
     - session time
@@ -31,6 +34,9 @@ A software package for multi-GNSS Precise Point Positioning
 ```
 ./bin/ppp path-to-rinexobs ppp.ini -v
 ```
+
+> Note: initial position should be provided in the RINEX-OBS header
+> You can exclude problematic satellites in `ppp.ini` accroding to postfit residuals (visualization with rtkplot)
 
 4. Visualization
 
@@ -48,7 +54,7 @@ Simply drag the generated .stat file to the GUI of rtkplot
 
 ```
 cd example/
-./test.sh
+./test.sh   # processing & plotting
 ```
 
 **Kinematic PPP using GEC data for ZIM2 on 2022-100**
@@ -57,8 +63,6 @@ cd example/
 # Note
 
 - The binary was built with gcc 11.3.0 on Ubuntu 22.04
-- Initial position should be provided in the RINEX-OBS header
-- ERP file should contain 3 days records
 - Please create an issue if you encounter any issues related to the software
 
 # Contact
