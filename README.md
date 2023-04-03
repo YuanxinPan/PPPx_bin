@@ -75,8 +75,8 @@ cd example/ppp/
 ```
 
 **Kinematic PPP using GEC data for ZIM2 on 2022-100**
-![Kinematic PPP using GEC data for ZIM2 on 2022-100 ](example/ppp/ZIM200CHE_R_20221000000_01D_30S_MO.png)
 
+<img src="example/ppp/ZIM200CHE_R_20221000000_01D_30S_MO.png" width="600">
 
 ## Module: clkcomb <a name="module_clkcomb"></a>
 
@@ -117,7 +117,8 @@ cd example/clkcomb/
 > More details about clock combination can be found [here](https://doi.org/10.27379/d.cnki.gwhdu.2021.000240)
 
 **Clock comparison for G21 on 2022-001**
-![Clock comparison for G21 on 2022-001](example/clkcomb/G21.png)
+
+<img src="example/clkcomb/G21.png" width="600">
 
 
 ## Note <a name="note"></a>
