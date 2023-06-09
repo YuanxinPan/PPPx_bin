@@ -5,16 +5,18 @@ Executables for the PPPx software package
 > This test version was built for Linux users only
 
 
-# Table of contents
-1. [Introduction](#introduction)
-2. [Module: ppp](#module_ppp)
-    1. [Usage](#usage_ppp)
-    2. [Example](#example_ppp)
-3. [Module: clkcomb](#module_clkcomb)
-    1. [Usage](#usage_clkcomb)
-    2. [Example](#example_clkcomb)
-4. [Note](#note)
-5. [Contact](#contact)
+# Table of Contents
+- [Introduction](#introduction)
+- [Module: ppp](#module_ppp)
+    - [Usage](#usage_ppp)
+    - [Example](#example_ppp)
+- [Module: clkcomb](#module_clkcomb)
+    - [Usage](#usage_clkcomb)
+    - [Example](#example_clkcomb)
+- [Module: seid](#module_seid)
+    - [Usage](#usage_seid)
+- [Note](#note)
+- [Contact](#contact)
 
 
 ## Introduction <a name="introduction"></a>
@@ -47,7 +49,7 @@ PPPx is a software package not only for multi-GNSS Precise Point Positioning
 
 3. Run the command
 
-```
+```shell
 ./bin/ppp path-to-rinexobs ppp.ini -v
 ```
 
@@ -59,7 +61,7 @@ PPPx is a software package not only for multi-GNSS Precise Point Positioning
 
 - Option 1: python script
 
-```
+```shell
 ./scripts/plot_ppppos.py .pos_file -s
 ```
 
@@ -69,7 +71,7 @@ Simply drag the generated .stat file to the GUI of rtkplot
 
 ### Example <a name="example_ppp"></a>
 
-```
+```shell
 cd example/ppp/
 ./test.sh   # processing & plotting
 ```
@@ -97,19 +99,19 @@ cd example/ppp/
 
 3. Run the command
 
-```
+```shell
 ./bin/clkcomb comb.ini
 ```
 
 4. Visualization
 
-```
+```shell
 ./scripts/plot_clkdif.sh dif_file log_file
 ```
 
 ### Example <a name="example_clkcomb"></a>
 
-```
+```shell
 cd example/clkcomb/
 ./test.sh   # combination & plotting
 ```
@@ -119,6 +121,22 @@ cd example/clkcomb/
 **Clock comparison for G21 on 2022-001**
 
 <img src="example/clkcomb/G21.png" width="600">
+
+
+## Module: seid <a name="module_seid"></a>
+
+`seid` is an implementation of the
+[Satellite-specific Epoch-differenced Ionospheric Delay](https://doi.org/10.1029/2009GL040018)
+method.  It can convert the single-frequency GNSS data to dual-frequency data
+using the observations from nearby geodetic GNSS stations, which is useful for
+single-frequency GNSS data processing.
+
+
+### Usage <a name="usage_seid"></a>
+
+```shell
+seid path-to-rnxobs seid.ini
+```
 
 
 ## Note <a name="note"></a>
