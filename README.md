@@ -21,7 +21,8 @@ Executables for the PPPx software package
 
 ## Introduction <a name="introduction"></a>
 
-PPPx is a software package not only for multi-GNSS Precise Point Positioning
+PPPx is a versatile multi-GNSS data processing software package. Its capabilities
+go beyond Precise Point Positioning (PPP).
 
 
 ## Module: ppp <a name="module_ppp"></a>
