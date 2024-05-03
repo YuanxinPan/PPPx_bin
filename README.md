@@ -7,6 +7,9 @@ Executables for the PPPx software package
 
 # Table of Contents
 - [Introduction](#introduction)
+- [Main App: pppx](#app_pppx)
+    - [Usage](#usage_pppx)
+    - [Example](#example_pppx)
 - [Module: ppp](#module_ppp)
     - [Usage](#usage_ppp)
     - [Example](#example_ppp)
@@ -25,7 +28,45 @@ PPPx is a versatile multi-GNSS data processing software package. Its capabilitie
 go beyond Precise Point Positioning (PPP).
 
 
-## Module: ppp <a name="module_ppp"></a>
+## Main App: pppx <a name="app_pppx"></a>
+
+`pppx` is the main application of this software package.
+
+The following libraries should be installed to run the app:
+- [ceres solver](http://ceres-solver.org)
+- [spdlog](https://github.com/gabime/spdlog)
+
+```shell
+sudo apt install libceres-dev libspdlog-dev
+```
+
+> NOTE: Currently, the app is not completely finished. Any feedback regarding `pppx` usage issues would be appreciated!
+
+The current limitations:
+- Not all the solvers are supported for each mode (spp/ppp/rtk/tdp)
+- Only short baseline is supported for rtk
+- Standard deviations of position estimates are not outputted when `ceres solver (fgo)` is used (quite time consuming)
+- ...
+
+### Usage <a name="usage_pppx"></a>
+
+1. Modify the configuration file `pppx.ini`
+2. Download necessary products, either brdc or precise prodcuts
+3. Run the command `pppx path-to-rinex pppx.ini`
+4. Visualize the generated `.stat` file with [rtkplot.exe](https://github.com/tomojitakasu/RTKLIB_bin/tree/rtklib_2.4.3)
+
+> Tip: Please check the `.log` file to see the exact settings used by the app
+
+
+### Example <a name="example_pppx"></a>
+
+```shell
+cd example/pppx/
+./test.sh   # data processing only
+```
+
+
+## Module: ppp (deprecated) <a name="module_ppp"></a>
 
 - Support GPS/GLONASS/Beidou-2+3/Galileo/QZSS
 - Flexible frequency selection (L1/L2/L5/...)
