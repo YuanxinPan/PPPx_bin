@@ -1,2 +1,9 @@
+user_output/
 example/clkcomb/products/
-user_output
+example/pppx/products/
+example/smartphone/products/
+example/smartphone/dataset_2023-05-18/
+
+*.log
+*.pos
+*.stat

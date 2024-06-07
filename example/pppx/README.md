@@ -72,9 +72,9 @@ Most settings inside `pppx.ini` is self-explained. Usually, users need to modify
 
 Although most settings are shared by different sol\_mode (i.e., spp/ppp/rtk/tdp), some settings are sol\_mode specific:
 ```ini
-[model]: trop
-; iono => not effective for rtk
-; Tropospheric and ionospheric delays are ignored for short baseline
+[model]: trop, iono
+; not effective for rtk and tdp
+; Tropospheric and ionospheric delays are ignored for short baseline or short time interval
 
 [solver]: slip_det
 ; only effective for ppp

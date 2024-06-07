@@ -1,6 +1,7 @@
 # PPPx\_bin
 
-PPPx is a versatile multi-GNSS data processing software package. Its capabilities go beyond Precise Point Positioning (PPP).
+PPPx is a versatile multi-GNSS data processing software package. Its capabilities
+go beyond Precise Point Positioning (PPP).
 
 This repository includes several executables of PPPx:
 - [pppx](example/pppx/README.md): The main program of PPPx, dedicated to positioning
@@ -19,7 +20,7 @@ The following libraries should be installed first to run the programs:
 - [ceres solver](http://ceres-solver.org)
 - [spdlog](https://github.com/gabime/spdlog)
 
-On a Ubuntu machine, you can run the following command for installation:
+On an Ubuntu machine, you can run the following command for installation:
 ```shell
 sudo apt install libceres-dev libspdlog-dev
 ```
@@ -28,7 +29,8 @@ sudo apt install libceres-dev libspdlog-dev
 
 ### Example
 
-Several examples are provided in the `example/` directory. Please execute the correspoding `run.sh` to see how the programs work.
+Several examples are provided in the `example/` directory. Please execute the
+correspoding `run.sh` to see how the programs work.
 
 
 

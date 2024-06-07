@@ -3,6 +3,8 @@
 DATA_DIR="./rinex"
 SOL_DIR="user_output"
 
+[ ! -d products ] && unzip products.zip
+
 for f in ${DATA_DIR}/ZIM2*.rnx
 do
     rnx=`basename $f`
