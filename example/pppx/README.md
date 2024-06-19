@@ -22,13 +22,13 @@ pppx path-to-rnxobs [rnxobs-of-base] pppx.ini
 
 # For example
 
-# PPP
+# SPP/PPP/TDP
+# Note: TDP should be used with high-frequency data (e.g., 1 Hz)
 pppx rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx pppx.ini
 
 # RTK
 # ZIMM will be the base station in this way
 pppx rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx rinex/ZIMM00CHE_R_20221000000_01D_30S_MO.rnx pppx.ini
-
 ```
 
 
@@ -38,7 +38,7 @@ pppx rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx rinex/ZIMM00CHE_R_20221000000_
 1. Configuration file: `pppx.ini`
 2. GNSS observations in RINEX format, specified by command line arguments
 3. Satellite products (option: brdc or precise), specified by `pppx.ini`
-    - brdc: [broadcast ephemeris](https://cddis.nasa.gov/archive/gnss/data/daily/2024/brdc/). Note: RINEX-4 is not supported yet
+    - brdc: [broadcast ephemeris](https://cddis.nasa.gov/archive/gnss/data/daily/2024/brdc/). RINEX-4 is not supported yet
     - precise: [IGS](https://cddis.nasa.gov/archive/gnss/products/) satellite orbit, clock and attitude (optional) products
 4. Table files (already provided in the `table/` directory, specified by `pppx.ini`)
 
@@ -92,10 +92,10 @@ Although most settings are shared by different sol\_mode (i.e., spp/ppp/rtk/tdp)
 
 ```shell
 # plot position estimates only
-../../scripts/plot_ppppos.py .pos_file
+../../scripts/plot_ppppos.py pos_file
 
 # plot position, receiver clock and ZTD estimates
-.././scripts/plot_ppppos.py .pos_file -a
+.././scripts/plot_ppppos.py pos_file -a
 
 # -i interactive mode
 # -s fixed scale of y-axis, otherwise automatically scaled
@@ -103,7 +103,7 @@ Although most settings are shared by different sol\_mode (i.e., spp/ppp/rtk/tdp)
 
 #### With RTKLIB
 
-Simply drag the `.stat` file to the GUI of [rtkplot](https://github.com/tomojitakasu/RTKLIB_bin/tree/rtklib_2.4.3)
+Simply drag the `stat` file to the GUI of [rtkplot](https://github.com/tomojitakasu/RTKLIB_bin/tree/rtklib_2.4.3)
 
 
 

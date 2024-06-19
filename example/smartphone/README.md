@@ -2,7 +2,7 @@
 
 This example demonstrates the high-precision ZTD estimation with Android
 smartphone GNSS data, which was published on the journal
-[Atmospheric Measurement Technique](https://doi.org/10.5194/egusphere-2024-66).
+[Atmospheric Measurement Techniques](https://doi.org/10.5194/egusphere-2024-66).
 
 The data collection details can be found in the paper mentioned above.
 In total, three devices were used to collect 24 h GNSS data:

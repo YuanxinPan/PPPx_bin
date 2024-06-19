@@ -3,7 +3,7 @@
 PPPx is a versatile multi-GNSS data processing software package. Its capabilities
 go beyond Precise Point Positioning (PPP).
 
-This repository includes several executables of PPPx:
+This repository includes several executables of PPPx and corresponding examples:
 - [pppx](example/pppx/README.md): The main program of PPPx, dedicated to positioning
 - [clkcomb](example/clkcomb/README.md): A program for PPP-AR products combination
 - [seid](example/seid/README.md): An implemation of the [SEID](https://doi.org/10.1029/2009GL040018) method
