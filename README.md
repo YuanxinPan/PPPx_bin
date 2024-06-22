@@ -16,14 +16,16 @@ This repository includes several executables of PPPx and corresponding examples:
 
 ### Prerequisites
 
-The following libraries should be installed first to run the programs:
+The following library should be installed first to run `pppx`:
 - [ceres solver](http://ceres-solver.org)
-- [spdlog](https://github.com/gabime/spdlog)
 
-On an Ubuntu machine, you can run the following command for installation:
+On an Ubuntu machine, you can run the following command for the installation:
 ```shell
-sudo apt install libceres-dev libspdlog-dev
+sudo apt install libceres-dev
 ```
+
+Other binaries, including `clkcomb`, `seid` and `pppx_static`, were built statically.
+Note that `pppx_static` does not support Factor Graph Optimization (FGO) as a solver.
 
 
 
