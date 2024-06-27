@@ -7,6 +7,7 @@
     - RTK: short baseline processing
     - TDP: Time-Differenced Positioning
 - Support GPS/GLONASS/Beidou-2+3/Galileo/QZSS
+- Support LSQ, EKF and FGO as solvers
 - Flexible frequency selection (L1/L2/L5/...)
 - High-precision yet computation efficient
 - Unified input/output format
@@ -66,7 +67,7 @@ Most settings inside `pppx.ini` is self-explained. Usually, users need to modify
 ```ini
 [session]: date
 [constellation]: system
-[solver]: sol_mode, pos_mode, solver
+[estimation]: sol_mode, pos_mode, solver
 [product]: src, nav, sp3, clk
 ```
 
@@ -76,11 +77,16 @@ Although most settings are shared by different sol\_mode (i.e., spp/ppp/rtk/tdp)
 ; not effective for rtk and tdp
 ; Tropospheric and ionospheric delays are ignored for short baseline or short time interval
 
-[solver]: slip_det
+[estimation]: solver
+; spp/tdp: only lsq and fgo are supported
+; ppp: only kalman and fgo are supported
+; rtk: only kalman is supported
+
+[estimation]: slip_det
 ; only effective for ppp
 ; rtk and tdp always use LLI and GF to detect cycle slips
 
-[solver]: pos_pri, clk_pri, isb_pri, ztd_pri
+[estimation]: pos_pri, clk_pri, isb_pri, ztd_pri
 ; only effective for ppp
 ```
 
@@ -118,5 +124,5 @@ cd example/pppx/
 
 **FGO-based kinematic PPP for ZIM2 (GPS + Galileo, 2022-100)**
 
-<img src="output/ZIM200CHE_R_20221000000_01D_30S_MO.png" width="600">
+<img src="05_ppp_fgo/ZIM200CHE_R_20221000000_01D_30S_MO.png" width="600">
 
