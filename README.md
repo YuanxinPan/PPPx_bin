@@ -31,7 +31,7 @@ Note that `pppx_static` does not support Factor Graph Optimization (FGO) as a so
 
 ### Example
 
-Several examples are provided in the `example/` directory. Please execute the
+Several examples are provided in the [example](example/) directory. Please execute the
 correspoding `run.sh` to see how the programs work.
 
 

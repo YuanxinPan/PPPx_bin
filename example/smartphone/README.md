@@ -34,11 +34,12 @@ ZTD = zhd + zwd + dzwd
 
 ## Citation
 
-You can cite our [AMT paper](https://doi.org/10.5194/egusphere-2024-66)
+You can cite our [AMT paper](https://doi.org/10.5194/amt-17-4303-2024)
 if you benefit from the PPPx software or the open-sourced GNSS dataset:
 
 ```
 Pan, Y., Kłopotek, G., Crocetti, L., Weinacker, R., Sturn, T., See, L., ... & Soja, B. (2024).
-Determination of High-Precision Tropospheric Delays Using Crowdsourced Smartphone GNSS Data. EGUsphere, 2024, 1-22.
-https://doi.org/10.5194/egusphere-2024-66
+Determination of high-precision tropospheric delays using crowdsourced smartphone GNSS data.
+Atmospheric Measurement Techniques, 17(14), 4303-4316.
+https://doi.org/10.5194/amt-17-4303-2024
 ```
