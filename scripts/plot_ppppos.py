@@ -82,8 +82,8 @@ def xyz2enu(xyz, orgxyz):
 def read_data(path):
     if path.endswith('.pos'):
         # column_names = [ 'sod', 'nsat', 'x', 'y', 'z', 'rck', 'zhd', 'zwd', 'dzwd' ]
-        # df = pd.read_csv(path, usecols=(1,2,3,4,5,9,10,11,12), delim_whitespace=True, names=column_names, header=None, skiprows=1)
-        df = pd.read_csv(path, usecols=(1,2,3,4,5,9,10,11,12), delim_whitespace=True)
+        # df = pd.read_csv(path, usecols=(1,2,3,4,5,9,10,11,12), delimiter='\s+', names=column_names, header=None, skiprows=1)
+        df = pd.read_csv(path, usecols=(1,2,3,4,5,9,10,11,12), delimiter='\s+')
         df['hour'] = df['sod']/3600
         df['ztd'] = df['zhd'] + df['zwd'] + df['dzwd']
 
@@ -135,7 +135,7 @@ def plot_pppx(df, is_plot_all=False, is_scaled=False):
 
     fig, axes = plt.subplots(4, 1, sharex=True, dpi=200, figsize=(6.4, 6.4))
 
-    std = np.std(df[['e', 'n', 'u']]*100, axis=0)
+    std = np.std(df[['e', 'n', 'u']]*100, axis=0).to_numpy()
     if is_plot_all:
         axes[0].plot(df['hour'], 100*df['e'], linewidth=1, color='tab:red', label='East')  # m -> cm
         axes[0].plot(df['hour'], 100*df['n'], linewidth=1, color='tab:green', label='North')
@@ -153,7 +153,8 @@ def plot_pppx(df, is_plot_all=False, is_scaled=False):
             axes[i].text(0.96, 0.80, f"{std[i]:5.2f} cm", fontsize=12,
                     horizontalalignment='right', verticalalignment='center', transform=axes[i].transAxes)
 
-    axes[3].plot(df['hour'], df['nsat'])
+    axes[3].plot(df['hour'], df['nsat'], '--', linewidth=0.5, color='lightgrey')
+    axes[3].plot(df['hour'], df['nsat'], '.', markersize=1)
     axes[3].set_xlabel('Time (hours)')
     axes[3].set_xlim([0, 24])
 
@@ -190,8 +191,8 @@ if __name__ == "__main__":
     if df is None:
         sys.exit(1)
 
-    std = np.std(df[['e', 'n', 'u']]*100, axis=0)
-    print(f"STD: {std[0]:8.2f} {std[1]:8.2f} {std[2]:8.2f} cm")
+    std = np.std(df[['e', 'n', 'u']]*100, axis=0).to_numpy()
+    print(f"{std[0]:8.2f} {std[1]:8.2f} {std[2]:8.2f}")
 
     fig, axes = plot_pppx(df, is_plot_all, is_scaled)
 

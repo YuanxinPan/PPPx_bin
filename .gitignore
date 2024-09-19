@@ -7,3 +7,4 @@ example/smartphone/dataset_2023-05-18/
 *.log
 *.pos
 *.stat
+*.png

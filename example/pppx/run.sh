@@ -1,38 +1,30 @@
 #!/bin/bash
 
-DATA_DIR="./rinex"
-SOL_DIR="user_output"
-
-
 
 [ ! -d products ] && unzip products.zip
 
 
+BIN_DIR="../../bin"
+DATA_DIR="./rinex"
 
 rnx="ZIM200CHE_R_20221000000_01D_30S_MO.rnx"
+ref="ZIMM00CHE_R_20221000000_01D_30S_MO.rnx"
+plt="../../scripts/plot_ppppos.py"
 echo "$rnx"
 
 
-echo -e "\n==> 00_spp (ionosphere-free combination)"
-../../bin/pppx_static rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx 00_spp.ini
-../../scripts/plot_ppppos.py 00_spp/${rnx/rnx/pos}
+examples=(00_spp_if 01_spp_sf 02_ppp_ekf 03_ppp_fgo 04_ppp_brdc 05_rtk)
+messages=("ionosphere-free combination" "single-frequency with GIM product" \
+          "Extended Kalman Filter"      "Factor Graph Optimization" \
+          "broadcast ephemeris + EKF"   "short baseline with L1 only")
 
-echo -e "\n==> 01_spp_ionex (GIM product)"
-../../bin/pppx_static rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx 01_spp_ionex.ini
-../../scripts/plot_ppppos.py 01_spp_ionex/${rnx/rnx/pos}
+for i in {0..5}
+do
+    echo -e "\n==> ${examples[$i]} (${messages[$i]})"
 
-echo -e "\n==> 02_ppp (precise satellite products)"
-../../bin/pppx_static rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx 02_ppp.ini
-../../scripts/plot_ppppos.py 02_ppp/${rnx/rnx/pos} -s
+    # $ref will only be used if sol_mode is rtk
+    # The last argument is always treated as config file
+    $BIN_DIR/pppx $DATA_DIR/$rnx $DATA_DIR/$ref ${examples[$i]}.ini
 
-echo -e "\n==> 03_ppp_brdc (broadcast ephemeris)"
-../../bin/pppx_static rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx 03_ppp_brdc.ini
-../../scripts/plot_ppppos.py 03_ppp_brdc/${rnx/rnx/pos}
-
-echo -e "\n==> 04_rtk"
-../../bin/pppx_static rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx rinex/ZIMM00CHE_R_20221000000_01D_30S_MO.rnx 04_rtk.ini
-../../scripts/plot_ppppos.py 04_rtk/${rnx/rnx/pos} -s
-
-echo -e "\n==> 05_ppp_fgo (Factor Graph Optimization)"
-../../bin/pppx rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx rinex/ZIMM00CHE_R_20221000000_01D_30S_MO.rnx 05_ppp_fgo.ini
-../../scripts/plot_ppppos.py 05_ppp_fgo/${rnx/rnx/pos} -s
+    $plt ${examples[$i]}/${rnx/rnx/pos}
+done

@@ -23,6 +23,7 @@ cd dataset_2023-05-18/
 for f in *.23d; do crx2rnx $f; done
 
 ./run.sh
+python plot_ztd.py
 ```
 
 The ZTD estimates can be found in the corresponding `pos file` (the last three columns).
