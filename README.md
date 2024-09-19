@@ -34,6 +34,11 @@ Note that `pppx_static` does not support Factor Graph Optimization (FGO) as a so
 Several examples are provided in the [example](example/) directory. Please execute the
 correspoding `run.sh` to see how the programs work.
 
+For example, here is a PPP kinematic positioning solution for the station ZIM2
+based on FGO using GPS and Galileo observations:
+
+<img src="example/pppx/03_ppp_fgo/ZIM200CHE_R_20221000000_01D_30S_MO.png" width="600">
+
 
 
 ## Contributing
