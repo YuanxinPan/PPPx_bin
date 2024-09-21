@@ -124,5 +124,5 @@ cd example/pppx/
 
 **FGO-based kinematic PPP for ZIM2 (GPS + Galileo, 2022-100)**
 
-<img src="05_ppp_fgo/ZIM200CHE_R_20221000000_01D_30S_MO.png" width="600">
+<img src="03_ppp_fgo/ZIM200CHE_R_20221000000_01D_30S_MO.png" width="500">
 
