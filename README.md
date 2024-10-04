@@ -5,7 +5,7 @@ go beyond Precise Point Positioning (PPP).
 
 This repository includes several executables of PPPx and corresponding examples:
 - [pppx](example/pppx/README.md): The main program of PPPx, dedicated to positioning
-- [clkcomb](example/clkcomb/README.md): A program for PPP-AR products combination
+- [clkcomb](https://github.com/YuanxinPan/clkcomb): A program for PPP-AR products combination
 - [seid](example/seid/README.md): An implemation of the [SEID](https://doi.org/10.1029/2009GL040018) method
 
 > Note: The binaries were built with gcc 11.3.0 on Ubuntu 22.04
@@ -24,7 +24,7 @@ On an Ubuntu machine, you can run the following command for the installation:
 sudo apt install libceres-dev
 ```
 
-Other binaries, including `clkcomb`, `seid` and `pppx_static`, were built statically.
+Other binaries, including `seid` and `pppx_static`, were built statically.
 Note that `pppx_static` does not support Factor Graph Optimization (FGO) as a solver.
 
 

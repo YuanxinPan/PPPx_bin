@@ -8,8 +8,9 @@
     - TDP: Time-Differenced Positioning
 - Support GPS/GLONASS/Beidou-2+3/Galileo/QZSS
 - Support LSQ, EKF and FGO as solvers
+- Support PPP-AR with OSB products (.BIA)
 - Flexible frequency selection (L1/L2/L5/...)
-- High-precision yet computation efficient
+- High-precision yet computation efficient (process 2880 epochs within 2 sec)
 - Unified input/output format
 
 
