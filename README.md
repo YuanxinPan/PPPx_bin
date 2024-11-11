@@ -28,8 +28,8 @@ Other programs in the PPPx software package include:
 `pppx` is recommendeded for use on Ubuntu, as the binary was built with gcc 11
 on Ubuntu 22.04. However, it should work on most modern Linux systems with gcc 11 available.
 
-The executable `bin/pppx` is dynamically linked to the
-[ceres solver](http://ceres-solver.org), so the library `libceres-dev` must be
+The executable `bin/pppx` is dynamically linked against the [ceres solver](http://ceres-solver.org)
+library (version >= 2.0.0), so the library `libceres-dev` must be
 installed first. The installation on Linux can be done with the following commands:
 
 ```shell
@@ -43,7 +43,9 @@ echo "export PATH=\${HOME}/.local/bin:\$PATH" >> ${ HOME}/.bashrc
 ```
 
 If you don't have the sudo privilege and cannot install `libceres-dev`, you can
-use the static build `bin/pppx\_static`, though this version does not support FGO.
+use the static build `bin/pppx_static`, though this version does not support FGO.
+
+> NOTE: Currently, `pppx` appears to work only on Ubuntu 22.04 or newer, as the `libceres-dev` package in Ubuntu 20.04 and earlier is of version 1.x.x, which is incompatible.
 
 
 ### Windows
@@ -56,7 +58,7 @@ The easiest way to run `pppx` on Windows is via the Windows Subsystem for Linux 
 The general steps to process GNSS data with `pppx` are:
 1. Prepare RINEX observation files and necessary products (either broadcast ephemeris or precise products)
 2. Modify the configuration file `pppx.ini`
-3. Execute `pppx` with the appropriate command-line arguments:
+3. Execute `pppx` with appropriate command-line arguments:
 
 ```shell
 pppx path-to-rnxo [rnxo-of-base] pppx.ini
