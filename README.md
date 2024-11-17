@@ -25,12 +25,17 @@ Other programs in the PPPx software package include:
 
 ### Linux
 
-`pppx` is recommendeded for use on Ubuntu, as the binary was built with gcc 11
-on Ubuntu 22.04. However, it should work on most modern Linux systems with gcc 11 available.
+`pppx` is recommendeded for use on Ubuntu or Debian, as the binary was built
+with gcc 11 on Ubuntu 22.04. However, it should work on most modern Linux systems.
+One limitation is that `pppx` uses the [ceres solver](http://ceres-solver.org)
+library to implement the FGO solver, and thus `libceres-dev` (version == 2.x.x)
+must be installed first. Currently, Ubuntu 20.04 and earlier versions only provide
+`libceres-dev` of version 1.x.x, which is not compatible.
 
-The executable `bin/pppx` is dynamically linked against the [ceres solver](http://ceres-solver.org)
-library (version >= 2.0.0), so the library `libceres-dev` must be
-installed first. The installation on Linux can be done with the following commands:
+
+#### Option 1: With `libceres-dev` (version == 2.x.x)
+
+The installation can be done with the following commands:
 
 ```shell
 sudo apt install libceres-dev
@@ -43,9 +48,21 @@ echo "export PATH=\${HOME}/.local/bin:\$PATH" >> ${ HOME}/.bashrc
 ```
 
 If you don't have the sudo privilege and cannot install `libceres-dev`, you can
-use the static build `bin/pppx_static`, though this version does not support FGO.
+use the static built `bin/pppx_static`, though this version does not support FGO.
 
-> NOTE: Currently, `pppx` appears to work only on Ubuntu 22.04 or newer, as the `libceres-dev` package in Ubuntu 20.04 and earlier is of version 1.x.x, which is incompatible.
+
+#### Option 2: With `.deb` file
+
+Download the `.deb` file from the latest [release](https://github.com/YuanxinPan/PPPx_bin/releases/).
+Then, run the following command to install the software:
+
+```shell
+sudo dpkg -i pppx_1.2.0_amb64.deb
+```
+
+The software and its dependencies will be installed in the `/opt/pppx/` directory.
+A symbolic link to the `pppx` execultable will be created in `/usr/local/bin/`,
+allowing you to invoke `pppx` from any directory in the terminal.
 
 
 ### Windows
@@ -90,7 +107,7 @@ pppx rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx rinex/ZIMM00CHE_R_20221000000_
 
 ### Visualization
 
-#### With python
+#### With Python
 
 ```shell
 # To plot position estimates only
