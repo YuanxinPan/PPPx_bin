@@ -151,7 +151,7 @@ the ZIM2 station, using FGO and GPS+Galileo observations:
 
 ## Contributing
 
-if you have suggestions or encounter issues related to the usage of the PPPx
+If you have suggestions or encounter issues related to the usage of the PPPx
 software, please create an [issue](https://github.com/YuanxinPan/PPPx_bin/issues/new).
 
 

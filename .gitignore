@@ -1,8 +1,9 @@
-user_output/
+debs
 example/clkcomb/products/
 example/pppx/products/
 example/smartphone/products/
 example/smartphone/dataset_2023-05-18/
+user_output/
 
 *.log
 *.pos
