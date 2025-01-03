@@ -16,9 +16,8 @@ The main program, `pppx`, focuses on positioning and supports the following feat
 - High precision and efficiency: Capable of processing 2880 epochs within 2 seconds
 - Unified input/output format
 
-Other programs in the PPPx software package include:
+Other program(s) in the PPPx software package include:
 - [clkcomb](https://github.com/YuanxinPan/clkcomb): A program for combining PPP-AR products
-- [seid](example/seid/README.md): An implemation of the [SEID](https://doi.org/10.1029/2009GL040018) method
 
 
 ## Installation
