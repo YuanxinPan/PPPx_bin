@@ -15,6 +15,7 @@ The main program, `pppx`, focuses on positioning and supports the following feat
 - Flexible frequency selection: L1/L2/L5/E1/E5a/...
 - High precision and efficiency: Capable of processing 2880 epochs within 2 seconds
 - Unified input/output format
+- Support Linux, Windows, and macOS
 
 Other program(s) in the PPPx software package include:
 - [clkcomb](https://github.com/YuanxinPan/clkcomb): A program for combining PPP-AR products
@@ -24,7 +25,7 @@ Other program(s) in the PPPx software package include:
 
 ### Linux
 
-`pppx` is recommendeded to run on Ubuntu or Debian, as the binary was built
+It is recommendeded to run `pppx` on Ubuntu or Debian, as the binary was built
 with gcc 11 on Ubuntu 22.04. However, it should work on most modern Linux systems.
 One limitation is that `pppx` uses the [ceres solver](http://ceres-solver.org)
 library to implement the FGO solver, and thus `libceres-dev` (version == 2.x.x)
@@ -41,13 +42,13 @@ sudo apt install libceres-dev
 git clone git@github.com:YuanxinPan/PPPx_bin.git
 
 mkdir -p ${HOME}/.local/bin
-cp PPPx_bin/bin/pppx ${HOME}/.local/bin/
+cp PPPx_bin/bin/linux/pppx ${HOME}/.local/bin/
 echo "export PATH=\${HOME}/.local/bin:\$PATH" >> ${ HOME}/.bashrc
 # Restart your terminal afterward
 ```
 
 If you don't have the sudo privilege and cannot install `libceres-dev`, you can
-use the static built `bin/pppx_static`, though this version does not support FGO.
+use the static built `bin/linux/pppx_static`, though this version does not support FGO.
 
 
 #### Option 2: With `.deb` file
@@ -77,8 +78,8 @@ However, `pppx` can run natively on Windows since version 1.2.1:
 
 ### macOS
 
-If you do not have [Homebrew](https://brew.sh/) on your Mac, please install it
-first (via the Terminal application). Then run the following commands:
+If you do not have [Homebrew](https://brew.sh/) on your Mac, please install it first.
+Then run the following commands via the Terminal application:
 
 ```shell
 # Install ceres-solver
@@ -88,7 +89,13 @@ brew install ceres-solver
 git clone git@github.com:YuanxinPan/PPPx_bin.git
 sudo mkdir -p /usr/local/bin/
 sudo cp PPPx_bin/bin/macos/pppx /usr/local/bin/
+
+# Check if the installation is successful
+pppx
 ```
+
+Due to Apple's security settings, you might need to authorize the `pppx` software:
+[Open a Mac app from an unknown developer](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac)
 
 > Note that `pppx` only supports Macs with Apple silicon and an OS version higher than Monterey
 
