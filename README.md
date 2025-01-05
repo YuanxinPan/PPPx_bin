@@ -24,7 +24,7 @@ Other program(s) in the PPPx software package include:
 
 ### Linux
 
-`pppx` is recommendeded for use on Ubuntu or Debian, as the binary was built
+`pppx` is recommendeded to run on Ubuntu or Debian, as the binary was built
 with gcc 11 on Ubuntu 22.04. However, it should work on most modern Linux systems.
 One limitation is that `pppx` uses the [ceres solver](http://ceres-solver.org)
 library to implement the FGO solver, and thus `libceres-dev` (version == 2.x.x)
@@ -32,7 +32,7 @@ must be installed first. Currently, Ubuntu 20.04 and earlier versions only provi
 `libceres-dev` of version 1.x.x, which is not compatible.
 
 
-#### Option 1: With `libceres-dev` (version == 2.x.x)
+#### Option 1: With `libceres-dev`
 
 The installation can be done with the following commands:
 
@@ -53,10 +53,10 @@ use the static built `bin/pppx_static`, though this version does not support FGO
 #### Option 2: With `.deb` file
 
 Download the `.deb` file from the latest [release](https://github.com/YuanxinPan/PPPx_bin/releases/).
-Then, run the following command to install the software:
+Then run the following command to install the software:
 
 ```shell
-sudo dpkg -i pppx_1.2.0_amb64.deb
+sudo dpkg -i pppx_1.2.1_amb64.deb
 ```
 
 The software and its dependencies will be installed in the `/opt/pppx/` directory.
@@ -67,6 +67,30 @@ allowing you to invoke `pppx` from any directory in the terminal.
 ### Windows
 
 The easiest way to run `pppx` on Windows is via the Windows Subsystem for Linux (WSL).
+
+However, `pppx` can run natively on Windows since version 1.2.1:
+1. Download DLLs via this [link](https://github.com/YuanxinPan/PPPx_bin/releases/download/v1.2.1/pppx_winows_dlls.zip)
+2. Uncompress the zip file and move the DLLs to the folder `bin/windows/`
+3. Add the absolute path of the folder `bin/windows` to the PATH environment variable
+4. Open `cmd.exe` and type `pppx.exe ` to test if it is correctly installed
+
+
+### macOS
+
+If you do not have [Homebrew](https://brew.sh/) on your Mac, please install it
+first (via the Terminal application). Then run the following commands:
+
+```shell
+# Install ceres-solver
+brew install ceres-solver
+
+# Install pppx
+git clone git@github.com:YuanxinPan/PPPx_bin.git
+sudo mkdir -p /usr/local/bin/
+sudo cp PPPx_bin/bin/macos/pppx /usr/local/bin/
+```
+
+> Note that `pppx` only supports Macs with Apple silicon and an OS version higher than Monterey
 
 
 ## Usage

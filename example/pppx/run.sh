@@ -4,8 +4,15 @@
 [ ! -d products ] && unzip products.zip
 
 
-BIN_DIR="../../bin"
 DATA_DIR="./rinex"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    pppx="../../bin/linux/pppx"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    pppx="../../bin/macos/pppx"
+else
+    pppx="../../bin/windows/pppx"
+fi
+
 
 rnx="ZIM200CHE_R_20221000000_01D_30S_MO.rnx"
 ref="ZIMM00CHE_R_20221000000_01D_30S_MO.rnx"
@@ -26,7 +33,7 @@ do
 
     # $ref will only be used if sol_mode is rtk
     # The last argument is always treated as config file
-    $BIN_DIR/pppx $DATA_DIR/$rnx $DATA_DIR/$ref ${examples[$i]}.ini
+    $pppx $DATA_DIR/$rnx $DATA_DIR/$ref ${examples[$i]}.ini
 
     $plt ${examples[$i]}/${rnx/rnx/pos} ${args[$i]}
 done
