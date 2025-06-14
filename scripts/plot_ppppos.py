@@ -83,7 +83,7 @@ def read_data(path):
     if path.endswith('.pos'):
         # column_names = [ 'sod', 'nsat', 'x', 'y', 'z', 'rck', 'zhd', 'zwd', 'dzwd' ]
         # df = pd.read_csv(path, usecols=(1,2,3,4,5,9,10,11,12), delimiter='\s+', names=column_names, header=None, skiprows=1)
-        df = pd.read_csv(path, usecols=(1,2,3,4,5,9,10,11,12), delimiter='\s+')
+        df = pd.read_csv(path, usecols=(1,2,3,4,5,9,10,11,12), delimiter='\\s+')
         df['hour'] = df['sod']/3600
         df['ztd'] = df['zhd'] + df['zwd'] + df['dzwd']
 

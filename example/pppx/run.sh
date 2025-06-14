@@ -33,7 +33,7 @@ do
 
     # $ref will only be used if sol_mode is rtk
     # The last argument is always treated as config file
-    $pppx $DATA_DIR/$rnx $DATA_DIR/$ref ${examples[$i]}.ini
+    $pppx -c ${examples[$i]}.ini $DATA_DIR/$rnx $DATA_DIR/$ref || continue
 
     $plt ${examples[$i]}/${rnx/rnx/pos} ${args[$i]}
 done

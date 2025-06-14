@@ -57,7 +57,7 @@ Download the `.deb` file from the latest [release](https://github.com/YuanxinPan
 Then run the following command to install the software:
 
 ```shell
-sudo dpkg -i pppx_1.2.1_amb64.deb
+sudo dpkg -i pppx_1.2.2_amb64.deb
 ```
 
 The software and its dependencies will be installed in the `/opt/pppx/` directory.
@@ -104,26 +104,31 @@ Due to Apple's security settings, you might need to authorize the `pppx` softwar
 
 The general steps to process GNSS data with `pppx` are:
 1. Prepare RINEX observation files and necessary products (either broadcast ephemeris or precise products)
-2. Modify the configuration file `pppx.ini`
+2. Modify an existing configuration file `pppx.ini`, or create a template ini file:
+
+```shell
+pppx -x ppp > pppx.ini  # ppp can be replaced with spp/rtk/tdp
+```
+
 3. Execute `pppx` with appropriate command-line arguments:
 
 ```shell
-pppx path-to-rnxo [rnxo-of-base] pppx.ini
+pppx -c pppx.ini path-to-rnxo [rnxo-of-base]
 
 # Example usage:
 
 # For SPP/PPP/TDP  (Note: TDP is suitable for high-frequency data, e.g., 1 Hz)
-pppx rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx pppx.ini
+pppx -c pppx.ini rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx
 
 # For RTK (ZIMM is the base station in this example)
-pppx rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx rinex/ZIMM00CHE_R_20221000000_01D_30S_MO.rnx pppx.ini
+pppx -c pppx.ini rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx rinex/ZIMM00CHE_R_20221000000_01D_30S_MO.rnx
 ```
 
 
 ### Input
 
 1. Configuration file: [pppx.ini](pppx.ini)
-2. GNSS observations: RINEX format
+2. GNSS observations: RINEX files
 3. Satellite products: Broadcast ephemeris or precise products, specified in `pppx.ini`
 4. Table files: Provided in the [table](table/) directory, specified in `pppx.ini`
 
