@@ -37,3 +37,7 @@ do
 
     $plt ${examples[$i]}/${rnx/rnx/pos} ${args[$i]}
 done
+
+
+echo -e "07_tdp (LSQ + precise products)"
+$pppx -c 07_tdp.ini $DATA_DIR/ALGO00CAN_R_20221000000_15M_01S_MO.rnx && $plt 07_tdp/ALGO00CAN_R_20221000000_15M_01S_MO.pos -s
