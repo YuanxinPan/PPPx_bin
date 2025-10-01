@@ -1,4 +1,5 @@
-* linguist-detectable=true linguist-language=C++
-example/** linguist-vendored
-table/** linguist-vendored
 bin/** linguist-vendored
+example/** linguist-vendored
+scripts/** linguist-vendored
+table/** linguist-vendored
+* linguist-detectable=true linguist-language=C++

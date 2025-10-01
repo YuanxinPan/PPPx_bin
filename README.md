@@ -1,3 +1,8 @@
+![GitHub Release](https://img.shields.io/github/v/release/YuanxinPan/PPPx_bin)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/YuanxinPan/PPPx_bin/total)
+[![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-blue)](#)
+
+
 # PPPx\_bin
 
 PPPx is a versatile multi-GNSS data processing software package. Its capabilities
