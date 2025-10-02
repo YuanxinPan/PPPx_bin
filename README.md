@@ -129,6 +129,24 @@ pppx -c pppx.ini rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx
 pppx -c pppx.ini rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx rinex/ZIMM00CHE_R_20221000000_01D_30S_MO.rnx
 ```
 
+To make GNSS data processing easier, the script `scripts/pppx.sh` is provided to
+automatically download necessary products (e.g., SP3, CLK, OBX, BIA, ERP, BRDC, GIM, VMF1)
+according to the configuration and invoke `pppx` afterwards. Currently, it only
+supports the operational products from [CODE](http://ftp.aiub.unibe.ch/CODE/).
+The recommended steps to use this wrapper script:
+
+```shell
+# Generate a default config file
+pppx -x ppp > pppx.ini   # options: spp/ppp/rtk/tdp
+
+# Edit pppx.ini if necessary but keep [product] (except "src") and [table] blank
+pppx.sh -c pppx.ini rinex/ZIM200CHE_R_20221000000_01D_30S_MO.rnx
+```
+
+> **NOTE**: `scripts/pppx.sh` should be manually edited and the variable
+"TABLE\_DIR" (line #42) should be set to the actual "table" folder of the
+pppx software package before first use.
+
 
 ### Input
 
