@@ -35,7 +35,7 @@ with gcc 11 on Ubuntu 22.04. However, it should work on most modern Linux system
 One limitation is that `pppx` uses the [ceres solver](http://ceres-solver.org)
 library to implement the FGO solver, and thus `libceres-dev` (version == 2.x.x)
 must be installed first. Currently, Ubuntu 20.04 and earlier versions only provide
-`libceres-dev` of version 1.x.x, which is not compatible.
+`libceres-dev 1.x.x`, which is not compatible.
 
 
 #### Option 1: With `libceres-dev`
@@ -52,9 +52,6 @@ echo "export PATH=\${HOME}/.local/bin:\$PATH" >> ${ HOME}/.bashrc
 # Restart your terminal afterward
 ```
 
-If you don't have the sudo privilege and cannot install `libceres-dev`, you can
-use the static built `bin/linux/pppx_static`, though this version does not support FGO.
-
 
 #### Option 2: With `.deb` file
 
@@ -62,7 +59,7 @@ Download the `.deb` file from the latest [release](https://github.com/YuanxinPan
 Then run the following command to install the software:
 
 ```shell
-sudo dpkg -i pppx_1.2.2_amb64.deb
+sudo dpkg -i pppx_1.2.4_amb64.deb
 ```
 
 The software and its dependencies will be installed in the `/opt/pppx/` directory.
@@ -74,7 +71,7 @@ allowing you to invoke `pppx` from any directory in the terminal.
 
 The easiest way to run `pppx` on Windows is via the Windows Subsystem for Linux (WSL).
 
-However, `pppx` can run natively on Windows since version 1.2.1:
+However, `pppx` can also run natively on Windows using the command prompt (cmd.exe):
 1. Download DLLs via this [link](https://github.com/YuanxinPan/PPPx_bin/releases/download/v1.2.1/pppx_winows_dlls.zip)
 2. Uncompress the zip file and move the DLLs to the folder `bin/windows/`
 3. Add the absolute path of the folder `bin/windows` to the PATH environment variable
@@ -87,7 +84,7 @@ If you do not have [Homebrew](https://brew.sh/) on your Mac, please install it f
 Then run the following commands via the Terminal application:
 
 ```shell
-# Install ceres-solver
+# Install or update ceres-solver
 brew install ceres-solver
 
 # Install pppx
@@ -96,6 +93,7 @@ sudo mkdir -p /usr/local/bin/
 sudo cp PPPx_bin/bin/macos/pppx /usr/local/bin/
 
 # Check if the installation is successful
+# If it fails, try to update ceres-solver
 pppx
 ```
 
