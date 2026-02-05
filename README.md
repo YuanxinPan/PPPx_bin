@@ -26,6 +26,16 @@ Other program(s) in the PPPx software package include:
 - [clkcomb](https://github.com/YuanxinPan/clkcomb): A program for combining PPP-AR products
 
 
+## Table of Contents
+- [Installation](#installation)
+    - [Linux](#linux)
+    - [Windows](#windows)
+    - [macOS](#macos)
+- [Usage](#usage)
+- [Example](#example)
+- [Contributing](#contributing)
+
+
 ## Installation
 
 ### Linux
