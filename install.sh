@@ -3,18 +3,29 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Define colors for beautiful output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
 REPO="YuanxinPan/PPPx_bin"
 EXE_NAME="pppx"
 INSTALL_DIR="${HOME}/.local/bin"
 
-echo "Starting installation of $EXE_NAME..."
+echo -e "${CYAN}${BOLD}==========================================${NC}"
+echo -e "${CYAN}${BOLD}       PPPx Automated Installer           ${NC}"
+echo -e "${CYAN}${BOLD}==========================================${NC}\n"
 
+echo -e "${CYAN}[1/5] Detecting System Environment...${NC}"
 # 1. Detect Operating System
 OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
 if [ "$OS" = "darwin" ]; then
     OS="macos"
 elif [ "$OS" != "linux" ]; then
-    echo "Error: Unsupported OS '$OS'. This script only supports Linux and macOS."
+    echo -e "${RED}Error: Unsupported OS '$OS'. This script only supports Linux and macOS.${NC}"
     exit 1
 fi
 
@@ -25,64 +36,99 @@ if [ "$ARCH" = "x86_64" ] || [ "$ARCH" = "amd64" ]; then
 elif [ "$ARCH" = "arm64" ] || [ "$ARCH" = "aarch64" ]; then
     ARCH="arm64"
 else
-    echo "Error: Unsupported architecture '$ARCH'."
+    echo -e "${RED}Error: Unsupported architecture '$ARCH'.${NC}"
     exit 1
 fi
 
-echo "Detected system: $OS ($ARCH)"
+echo -e "      OS:   ${BOLD}$OS${NC}"
+echo -e "      Arch: ${BOLD}$ARCH${NC}\n"
+
+# Verify 'unzip' is installed
+if ! command -v unzip &> /dev/null; then
+    echo -e "${RED}Error: 'unzip' is not installed.${NC}"
+    echo -e "Please install it using your system's package manager (e.g., 'sudo apt install unzip') and run this script again."
+    exit 1
+fi
 
 # 3. Fetch the latest release download URL from GitHub API
-echo "Fetching latest release data..."
+echo -e "${CYAN}[2/5] Fetching Latest Release...${NC}"
 LATEST_JSON=$(curl -s "https://api.github.com/repos/$REPO/releases/latest")
 
-# Search for the asset that matches the OS and Architecture
-# Assuming your assets are named something like: PPPx_v1.2.0_linux_x86_64.tar.gz
-echo "$LATEST_JSON" | grep '"browser_download_url":'
+# Search for the zip asset that matches the OS and Architecture
 DOWNLOAD_URL=$(echo "$LATEST_JSON" | grep '"browser_download_url":' | grep -i "pppx.*${OS}_${ARCH}\.zip" | head -n 1 | cut -d '"' -f 4)
 
 if [ -z "$DOWNLOAD_URL" ]; then
-    echo "Error: Could not find a matching release asset for $OS $ARCH."
-    echo "Please download and install manually from: https://github.com/$REPO/releases/latest"
+    echo -e "${RED}Error: Could not find a matching release asset for $OS $ARCH.${NC}"
+    echo -e "Please download and install manually from: https://github.com/$REPO/releases/latest"
     exit 1
 fi
 
-echo "Downloading from: $DOWNLOAD_URL"
+echo -e "      Found: ${DOWNLOAD_URL##*/}\n"
 
 # 4. Download and Extract to a temporary directory
 TMP_DIR=$(mktemp -d)
 ZIP_FILE="$TMP_DIR/release.zip"
 
-# Download the file
-echo "Downloading to: $ZIP_FILE"
+echo -e "${CYAN}[3/5] Downloading & Extracting...${NC}"
 curl -sL "$DOWNLOAD_URL" -o "$ZIP_FILE"
+unzip -q "$ZIP_FILE" -d "$TMP_DIR"
 
-echo "Extracting..."
-unzip "$ZIP_FILE" -d "$TMP_DIR"
-
-# Find the executable (in case it extracted into a subfolder)
-find "$TMP_DIR" -type f -name "$EXE_NAME"
+# Find the executable
 EXTRACTED_EXE=$(find "$TMP_DIR" -type f -name "$EXE_NAME" | head -n 1)
 
 if [ -z "$EXTRACTED_EXE" ]; then
-    echo "Error: Could not find the '$EXE_NAME' executable inside the downloaded archive."
+    echo -e "${RED}Error: Could not find the '$EXE_NAME' executable inside the downloaded archive.${NC}"
     rm -rf "$TMP_DIR"
     exit 1
 fi
+echo -e "      Extraction successful.\n"
 
 # 5. Move to the installation directory
-echo "Installing to $INSTALL_DIR..."
-echo "You may be prompted for your password to grant 'sudo' permissions."
+echo -e "${CYAN}[4/5] Installing to $INSTALL_DIR...${NC}"
+mkdir -p "$INSTALL_DIR"
 mv "$EXTRACTED_EXE" "$INSTALL_DIR/$EXE_NAME"
 chmod +x "$INSTALL_DIR/$EXE_NAME"
 
-# 6. macOS Quarantine bypass (prevents the "Cannot be opened" security warning)
+# macOS Quarantine bypass
 if [ "$OS" = "macos" ]; then
-    echo "Applying macOS specific configurations..."
+    echo -e "      Applying macOS specific security configurations..."
     xattr -d com.apple.quarantine "$INSTALL_DIR/$EXE_NAME" 2>/dev/null || true
+fi
+echo -e "      Installed successfully.\n"
+
+# 6. Check and Update PATH Variable
+echo -e "${CYAN}[5/5] Checking Environment PATH...${NC}"
+NEED_RESTART=false
+
+if [[ ":$PATH:" != *":$INSTALL_DIR:"* ]]; then
+    # Determine the correct profile file based on the user's shell
+    USER_SHELL=$(basename "$SHELL")
+    if [ "$USER_SHELL" = "zsh" ]; then
+        PROFILE_FILE="${HOME}/.zshrc"
+    elif [ "$USER_SHELL" = "bash" ]; then
+        PROFILE_FILE="${HOME}/.bashrc"
+    else
+        PROFILE_FILE="${HOME}/.profile"
+    fi
+
+    echo -e "      Adding $INSTALL_DIR to $PROFILE_FILE"
+    echo "" >> "$PROFILE_FILE"
+    echo "# Added by pppx installer" >> "$PROFILE_FILE"
+    echo "export PATH=\"$INSTALL_DIR:\$PATH\"" >> "$PROFILE_FILE"
+    NEED_RESTART=true
+else
+    echo -e "      Directory is already in your PATH."
 fi
 
 # 7. Clean up
 rm -rf "$TMP_DIR"
 
-echo ""
-echo "Installation complete! You can now run '$EXE_NAME' from anywhere in your terminal."
+echo -e "\n${GREEN}${BOLD}Installation complete!${NC}"
+
+if [ "$NEED_RESTART" = true ]; then
+    echo -e "${YELLOW}NOTE: The installation directory was just added to your PATH.${NC}"
+    echo -e "${YELLOW}Please restart your terminal or run the following command to use pppx:${NC}"
+    echo -e "${BOLD}source $PROFILE_FILE${NC}"
+else
+    echo -e "You can now run '${BOLD}$EXE_NAME${NC}' from anywhere in your terminal."
+fi
