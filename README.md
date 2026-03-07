@@ -40,77 +40,129 @@ Other program(s) in the PPPx software package include:
 
 ### Linux
 
-It is recommendeded to run `pppx` on Ubuntu or Debian, as the binary was built
-with gcc 11 on Ubuntu 22.04. However, it should work on most modern Linux systems.
-One limitation is that `pppx` uses the [ceres solver](http://ceres-solver.org)
-library to implement the FGO solver, and thus `libceres-dev` (version == 2.x.x)
-must be installed first. Currently, Ubuntu 20.04 and earlier versions only provide
-`libceres-dev 1.x.x`, which is not compatible.
+This application is distributed as an [AppImage](https://appimage.org/), making it portable
+across most modern Linux distributions. Specifically, `pppx` is built on Ubuntu 20.04 and it
+requires the host system to have **GNU C Library (`glibc`) version 2.31 or newer**.
+
+It is compatible with the following distributions (and any of their derivatives):
+
+| Distribution Family | Supported Versions
+| :--- | :--- |
+| **Ubuntu** | 20.04 LTS, 22.04 LTS, 24.04 LTS (and newer) |
+| **Linux Mint** | 20, 21, 22 (and newer) |
+| **Debian** | 11 "Bullseye", 12 "Bookworm" (and newer) |
+| **Fedora** | 32 (and newer) |
+| **RHEL / Rocky / Alma** | 9.x (and newer) *Note: RHEL 8 is not supported* |
+| **openSUSE** | Leap 15.3+, Tumbleweed |
+| **Arch Linux / Manjaro** | Rolling releases (Always updated) |
+
+❓ **Not sure if your system is supported?**
+
+> You can easily check your system's `glibc` version by running the `ldd --version` command in your terminal
 
 
-#### Option 1: With `libceres-dev`
+#### Option 1: Automated Installation (Recommended)
 
-The installation can be done with the following commands:
+Run this single command to automatically download and install the latest release to `~/.local/bin`:
 
 ```shell
-sudo apt install libceres-dev
-git clone git@github.com:YuanxinPan/PPPx_bin.git
-
-mkdir -p ${HOME}/.local/bin
-cp PPPx_bin/bin/linux/pppx ${HOME}/.local/bin/
-echo "export PATH=\${HOME}/.local/bin:\$PATH" >> ${ HOME}/.bashrc
-# Restart your terminal afterward
+curl -sL https://raw.githubusercontent.com/YuanxinPan/PPPx_bin/main/install.sh | bash
 ```
 
 
-#### Option 2: With `.deb` file
+#### Option 2: Manual Installation
 
-Download the `.deb` file from the latest [release](https://github.com/YuanxinPan/PPPx_bin/releases/).
-Then run the following command to install the software:
+If you prefer not to use the automated script, you can install `pppx` manually:
+1. Download the `pppx_v1.x.x_linux_x86_64.zip` asset from the latest
+   [Release](https://github.com/YuanxinPan/PPPx_bin/releases)
+2. Uncompress the archive and you will get the `pppx` executable
+3. Open your terminal and navigate to your download folder
+4. Make the file executable and move it to your user binary folder:
 
 ```shell
-sudo dpkg -i pppx_1.2.4_amb64.deb
-```
+chmod +x pppx
+mkdir -p ~/.local/bin
+mv pppx ~/.local/bin/pppx
 
-The software and its dependencies will be installed in the `/opt/pppx/` directory.
-A symbolic link to the `pppx` execultable will be created in `/usr/local/bin/`,
-allowing you to invoke `pppx` from any directory in the terminal.
+# Restart your terminal and run `pppx` to test if it works
+# If not, add `~/.local/bin` to PATH via the command below:
+echo "export PATH=\${HOME}/.local/bin:\$PATH" >> ~/.bashrc
+```
 
 
 ### Windows
 
 The easiest way to run `pppx` on Windows is via the Windows Subsystem for Linux (WSL).
+However, `pppx` can also run natively on Windows using PowerShell or Command Prompt (cmd.exe).
 
-However, `pppx` can also run natively on Windows using the command prompt (cmd.exe):
-1. Download DLLs via this [link](https://github.com/YuanxinPan/PPPx_bin/releases/download/v1.2.1/pppx_winows_dlls.zip)
-2. Uncompress the zip file and move the DLLs to the folder `bin/windows/`
-3. Add the absolute path of the folder `bin/windows` to the PATH environment variable
-4. Open `cmd.exe` and type `pppx.exe ` to test if it is correctly installed
+
+#### Option 1: Automated Installation (Recommended)
+
+Open PowerShell and run this command. It will automatically download the executable, fetch the required DLLs, and add the software (`C:\Users\<YOUR_USER_NAME>\AppData\Local\Programs\PPPx`) to your system `PATH`:
+
+```PowerShell
+irm https://raw.githubusercontent.com/YuanxinPan/PPPx_bin/main/install.ps1 | iex
+```
+> Note: You must restart PowerShell or cmd.exe after the installation
+
+
+#### Option 2: Manual Installation
+
+If you prefer not to use the automated script, you can install `pppx` manually:
+1. Download the `pppx_v1.x.x_windows_x86_64.zip` asset from the latest [Release](https://github.com/YuanxinPan/PPPx_bin/releases)
+2. Download the required Windows DLLs via this [link](https://github.com/YuanxinPan/PPPx_bin/releases/download/v1.2.1/pppx_winows_dlls.zip)
+3. Create the PPPx folder: `C:\Users\<YOUR_USER_NAME>\AppData\Local\Programs\PPPx`
+3. Extract both archives and place the `.dll` files and `pppx.exe` in the PPPx folder
+4. Add the absolute path of this folder to your Windows `PATH` environment variable
+5. Open PowerShell or Command Prompt and type `pppx.exe` to test if it is correctly installed
 
 
 ### macOS
 
-If you do not have [Homebrew](https://brew.sh/) on your Mac, please install it first.
-Then run the following commands via the Terminal application:
+`pppx` only supports Macs with Apple silicon and an OS version higher than Monterey.
+
+⚠️ **Prerequisite**
+
+If you do not have [Homebrew](https://brew.sh/) on your Mac, please install it first:
 
 ```shell
-# Install or update ceres-solver
-brew install ceres-solver
-
-# Install pppx
-git clone git@github.com:YuanxinPan/PPPx_bin.git
-sudo mkdir -p /usr/local/bin/
-sudo cp PPPx_bin/bin/macos/pppx /usr/local/bin/
-
-# Check if the installation is successful
-# If it fails, try to update ceres-solver
-pppx
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Due to Apple's security settings, you might need to authorize the `pppx` software:
-[Open a Mac app from an unknown developer](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac)
+`pppx` is linked against the newest `ceres-solver` library. Make sure you have
+installed the newest version as well in order to run `pppx` properly on your Mac.
+Run the following command in the Terminal application:
 
-> Note that `pppx` only supports Macs with Apple silicon and an OS version higher than Monterey
+```shell
+brew install ceres-solver
+```
+
+
+#### Option 1: Automated Installation (Recommended)
+Run this command in your Terminal to automatically download the latest release, bypass Apple's quarantine security check, and install it to `~/.local/bin/`:
+
+```shell
+curl -sL https://raw.githubusercontent.com/YuanxinPan/PPPx_bin/main/install.sh | bash
+```
+
+
+#### Option 2: Manual Installation
+
+If you prefer not to use the automated script, you can install `pppx` manually:
+1. Download the `pppx_v1.x.x_macos_arm64.zip` asset from the latest [Release](https://github.com/YuanxinPan/PPPx_bin/releases)
+2. Uncompress the archive and you will get the `pppx` executable
+3. Open the Terminal application and navigate to your download folder
+4. Move the `pppx` executable to `~/.local/bin/` using Terminal:
+```shell
+chmod +x pppx
+mkdir -p ~/.local/bin
+mv pppx ~/.local/bin/
+
+echo "export PATH=\${HOME}/.local/bin:\$PATH" >> ~/.zshrc
+```
+5. Due to Apple's Gatekeeper security settings, you must authorize the software before it will run. You can do this by running `xattr -d com.apple.quarantine ~/.local/bin/pppx` or by following this
+[Apple Support Guide](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac)
+6. Restart your Terminal and run `pppx` to test if it is correctly installed
 
 
 ## Usage
