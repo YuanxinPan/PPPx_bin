@@ -20,7 +20,7 @@ The main program, `pppx`, focuses on positioning and supports the following feat
 - Flexible frequency selection: L1/L2/L5/E1/E5a/...
 - High precision and efficiency: Capable of processing 2880 epochs within 2 seconds
 - Unified input/output format
-- Support Linux, Windows, and macOS
+- Supports Linux, Windows, and macOS
 
 Other program(s) in the PPPx software package include:
 - [clkcomb](https://github.com/YuanxinPan/clkcomb): A program for combining PPP-AR products
@@ -75,7 +75,7 @@ curl -sL https://raw.githubusercontent.com/YuanxinPan/PPPx_bin/main/install.sh |
 If you prefer not to use the automated script, you can install `pppx` manually:
 1. Download the `pppx_v1.x.x_linux_x86_64.zip` asset from the latest
    [Release](https://github.com/YuanxinPan/PPPx_bin/releases)
-2. Uncompress the archive and you will get the `pppx` executable
+2. Extract the archive to obtain the `pppx` executable
 3. Open your terminal and navigate to your download folder
 4. Make the file executable and move it to your user binary folder:
 
@@ -129,8 +129,8 @@ If you do not have [Homebrew](https://brew.sh/) on your Mac, please install it f
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-`pppx` is linked against the newest `ceres-solver` library. Make sure you have
-installed the newest version as well in order to run `pppx` properly on your Mac.
+`pppx` is linked against the latest `ceres-solver` library. Make sure you have
+installed the latest version as well in order to run `pppx` properly on your Mac.
 Run the following command in the Terminal application:
 
 ```shell
@@ -150,7 +150,7 @@ curl -sL https://raw.githubusercontent.com/YuanxinPan/PPPx_bin/main/install.sh |
 
 If you prefer not to use the automated script, you can install `pppx` manually:
 1. Download the `pppx_v1.x.x_macos_arm64.zip` asset from the latest [Release](https://github.com/YuanxinPan/PPPx_bin/releases)
-2. Uncompress the archive and you will get the `pppx` executable
+2. Extract the archive to obtain the `pppx` executable
 3. Open the Terminal application and navigate to your download folder
 4. Move the `pppx` executable to `~/.local/bin/` using Terminal:
 ```shell
