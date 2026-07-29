@@ -42,6 +42,7 @@ MSGSTA="${BLUE}===>$NC"
 readonly PPPX_ROOT="$HOME/.pppx"
 readonly TABLE_DIR="PACKAGE_ROOT/table"
 readonly PRODUCT_DIR="./products"
+readonly CODE_HOST="https://www.aiub.unibe.ch/download/CODE"
 
 ######################################################################
 ##                     Funciton definations                         ##
@@ -234,7 +235,7 @@ PrepareProducts() { # purpose: prepare products in working directory
     local dow=${wkdow[1]}
 
     local ac="COD"
-    local HOST="ftp://ftp.aiub.unibe.ch/CODE/$year"
+    local HOST="$CODE_HOST/$year"
     local rapid="no"
     local sp3 clk erp obx bia ion
     eval $(GetProductNames $mjd_mid $ac FIN)
@@ -369,7 +370,7 @@ UseRapidProducts() { # purpose: switch product set to CODE rapid (caller vars: H
     [ $mjd -lt 59910 ] && return 1  # only short-name rapid products before GPS week 2238
 
     echo -e "$MSGWAR final products not available, falling back to CODE rapid products"
-    HOST="ftp://ftp.aiub.unibe.ch/CODE"  # rapid products reside at the top level
+    HOST="$CODE_HOST"  # rapid products reside at the top level
     eval $(GetProductNames $mjd $ac RAP)
     rapid="yes"
     return 0
